@@ -21,11 +21,11 @@ export const TaskLists = () => {
   };
 
 
-
   const crearRows = () => {
     return tasks.map((task) => (
       <tr key={task.id}>
-        <td className="w-75">{task.title}</td>
+        <td className="w-50">{task.title}</td>
+        <td className="w-25">{task.user.name}</td>
         <td>
           <button
             className="btn btn-outline-dark mr-5"
@@ -50,6 +50,7 @@ export const TaskLists = () => {
         <thead>
           <tr>
             <th>Tarea</th>
+            <th>Usuario</th>
             <th>Opciones</th>
           </tr>
         </thead>

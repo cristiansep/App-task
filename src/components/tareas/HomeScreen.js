@@ -65,7 +65,7 @@ export const HomeScreen = () => {
           <h1>Lista de tareas</h1>
         </div>
 
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center ">
           <form className="row w-75" onSubmit={handleSubmitForm}>
           <div className="col-sm-10">
           <div className="form-group mx-sm-3 mb-2">
