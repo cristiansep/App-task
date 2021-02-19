@@ -66,11 +66,12 @@ export const HomeScreen = () => {
         </div>
 
         <div className="d-flex justify-content-center">
-          <form className="form-row w-100" onSubmit={handleSubmitForm}>
-            <div className="form-group mx-sm-3 mb-2 w-75">
+          <form className="row w-75" onSubmit={handleSubmitForm}>
+          <div className="col-sm-10">
+          <div className="form-group mx-sm-3 mb-2">
               <input
                 type="text"
-                className={`form-control ${!titleValid && "is-invalid"}`}
+                className={`form-control w-100 ${!titleValid && "is-invalid"}`}
                 name="title"
                 value={title || ""}
                 placeholder="Ingrese su tarea"
@@ -78,6 +79,8 @@ export const HomeScreen = () => {
                 autoComplete="off"
               />
             </div>
+          </div>
+           
             <button type="submit" className="btn btn-primary mb-2">
               Guardar
             </button>

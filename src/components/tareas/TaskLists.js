@@ -20,23 +20,21 @@ export const TaskLists = () => {
     dispatch(taskSetActive(e));
   };
 
+
+
   const crearRows = () => {
     return tasks.map((task) => (
       <tr key={task.id}>
-        <td style={{ cursor: "pointer" }} onClick={() => handleUpdate(task)}>
-          {task.title}
-        </td>
+        <td className="w-75">{task.title}</td>
         <td>
           <button
-            className="btn btn-warning mr-5"
+            className="btn btn-outline-dark mr-5"
             onClick={() => handleUpdate(task)}
           >
             <i className="fas fa-edit"></i>
           </button>
-        </td>
-        <td>
           <button
-            className="btn btn-danger"
+            className="btn btn-outline-danger"
             onClick={() => handleDelete(task.id)}
           >
             <i className="fas fa-trash"></i>
@@ -47,17 +45,16 @@ export const TaskLists = () => {
   };
 
   return (
-    <>
-      <table className="table table-stripped mt-4">
+    <div className="d-flex justify-content-center">
+      <table className="table table-stripped mt-4 w-75 ">
         <thead>
           <tr>
             <th>Tarea</th>
-            <th>Editar</th>
-            <th>Borrar</th>
+            <th>Opciones</th>
           </tr>
         </thead>
         <tbody>{crearRows()}</tbody>
       </table>
-    </>
+    </div>
   );
 };
