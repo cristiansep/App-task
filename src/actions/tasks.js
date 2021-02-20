@@ -1,32 +1,30 @@
 import { types } from "../types/types";
 import { fetchConToken } from "../helpers/fetch";
 import Swal from "sweetalert2";
+import { prepareTasks } from "../helpers/prepareTasks";
 
 
 export const taskStartAddNew = (task) => {
-    return async(dispatch, getState) => {
+  return async (dispatch, getState) => {
+    const { uid, name } = getState().auth;
 
-        const {uid, name} = getState().auth;
+    try {
+      const resp = await fetchConToken("tareas", task, "POST");
+      const body = await resp.json();
 
-       try {
-
-        const resp = await fetchConToken('tareas', task, 'POST');
-        const body = await resp.json();
-
-        if(body.ok) {
-            task.id = body.tarea.id;
-            task.user = {
-                _id: uid,
-                name: name
-            }
-            dispatch(taskAddNew(task));
-        }
-           
-       } catch (error) {
-           console.log(error)
-       }
+      if (body.ok) {
+        task.id = body.tarea.id;
+        task.user = {
+          _id: uid,
+          name: name,
+        };
+        dispatch(taskAddNew(task));
+      }
+    } catch (error) {
+      console.log(error);
     }
-}
+  };
+};
 
 
  const taskAddNew = (task) =>( {
@@ -95,24 +93,20 @@ const taskDeleted = (id) => ({
 
 
 
-
 export const taskStartLoading = () => {
-    return async(dispatch) => {
-        
-        try {
+  return async (dispatch) => {
+    try {
+      const resp = await fetchConToken("tareas");
+      const body = await resp.json();
 
-            const resp = await fetchConToken('tareas');
-            const body = await resp.json();
+      const tasks = prepareTasks(body.tareas);
 
-            const tasks = body.tareas;
-
-            dispatch(taskLoaded(tasks));
-            
-        } catch (error) {
-            console.log(error)
-        }
+      dispatch(taskLoaded(tasks));
+    } catch (error) {
+      console.log(error);
     }
-}
+  };
+};
 
 const taskLoaded = (tasks) => ({
     type: types.taskLoaded,

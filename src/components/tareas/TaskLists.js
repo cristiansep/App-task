@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { taskSetActive, taskStartDelete, taskStartLoading } from '../../actions/tasks';
 
+import moment from 'moment';
+
+
 export const TaskLists = () => {
   const { tasks } = useSelector((state) => state.task);
 
@@ -20,13 +23,14 @@ export const TaskLists = () => {
     dispatch(taskSetActive(e));
   };
 
-
   const crearRows = () => {
     return tasks.map((task) => (
       <tr key={task.id}>
-        <td className="w-50">{task.title}</td>
-        <td className="w-25">{task.user.name}</td>
-        <td>
+        <td className="w-25">{task.desc}</td>
+        <td className="w-auto">{task.user.name}</td>
+        <td className="w-auto">{moment(task.date).format('DD-MM-YYYY')}</td>
+        <td className="w-auto">{(task.vigente ? 'Vigente' : 'Terminada')}</td>
+        <td className="w-25">
           <button
             className="btn btn-outline-dark mr-5"
             onClick={() => handleUpdate(task)}
@@ -51,6 +55,8 @@ export const TaskLists = () => {
           <tr>
             <th>Tarea</th>
             <th>Usuario</th>
+            <th>Fecha</th>
+            <th>Estado</th>
             <th>Opciones</th>
           </tr>
         </thead>

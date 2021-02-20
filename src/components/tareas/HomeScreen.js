@@ -11,17 +11,17 @@ import { TaskLists } from './TaskLists';
 
 
 
-const initTask = { title: "" };
+const initTask = { desc: "" };
 
 export const HomeScreen = () => {
   const { activeTask } = useSelector((state) => state.task);
 
   const dispatch = useDispatch();
 
-  const [titleValid, setTitleValid] = useState(true);
+  const [descValid, setDescValid] = useState(true);
   const [formValues, setFormValues] = useState(initTask);
 
-  const { title } = formValues;
+  const { desc } = formValues;
 
   useEffect(() => {
     if (activeTask) {
@@ -41,8 +41,8 @@ export const HomeScreen = () => {
   const handleSubmitForm = (e) => {
     e.preventDefault();
 
-    if (title.trim().length < 2) {
-      return setTitleValid(false);
+    if (desc.trim().length < 2) {
+      return setDescValid(false);
     }
 
     if (activeTask) {
@@ -52,7 +52,7 @@ export const HomeScreen = () => {
       dispatch(taskStartAddNew(formValues));
     }
 
-    setTitleValid(true);
+    setDescValid(true);
     setFormValues(initTask);
     taskStartUpdate();
   };
@@ -71,9 +71,9 @@ export const HomeScreen = () => {
           <div className="form-group mx-sm-3 mb-2">
               <input
                 type="text"
-                className={`form-control w-100 ${!titleValid && "is-invalid"}`}
-                name="title"
-                value={title || ""}
+                className={`form-control w-100 ${!descValid && "is-invalid"}`}
+                name="desc"
+                value={desc || ""}
                 placeholder="Ingrese su tarea"
                 onChange={handleInputChange}
                 autoComplete="off"
