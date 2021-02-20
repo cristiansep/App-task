@@ -14,6 +14,8 @@ export const taskStartAddNew = (task) => {
 
       if (body.ok) {
         task.id = body.tarea.id;
+        task.date = body.tarea.date
+        task.vigente = body.tarea.vigente
         task.user = {
           _id: uid,
           name: name,
